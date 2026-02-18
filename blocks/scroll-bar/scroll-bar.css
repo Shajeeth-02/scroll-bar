@@ -1,0 +1,185 @@
+/* ── Scroll-bar block ─────────────────────────────────────────────────────── */
+
+.scroll-bar {
+  background-color: #12122a;
+  color: #fff;
+  padding: 48px 32px 56px;
+}
+
+/* Header */
+.scroll-bar .scroll-bar-header {
+  margin-bottom: 40px;
+}
+
+.scroll-bar .scroll-bar-header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.scroll-bar .scroll-bar-header p {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+/* Steps wrapper – positions the track behind the icons */
+.scroll-bar .scroll-bar-steps {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Connecting track line
+   Spans between the centre of the first icon (12.5 % with 4 equal steps)
+   and the centre of the last icon (87.5 % → right: 12.5 %) */
+.scroll-bar .scroll-bar-track {
+  position: absolute;
+  top: 23px; /* half of the 46 px icon circle */
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 0;
+}
+
+.scroll-bar .scroll-bar-fill {
+  height: 100%;
+  background: #fff;
+  width: 0%;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Individual step */
+.scroll-bar .scroll-bar-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* Icon circle */
+.scroll-bar .scroll-bar-step-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: #12122a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  margin-bottom: 14px;
+}
+
+.scroll-bar .scroll-bar-step-icon img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: invert(1) brightness(0.5);
+  transition: filter 0.3s ease;
+}
+
+/* Active icon */
+.scroll-bar .scroll-bar-step.is-active .scroll-bar-step-icon {
+  background: #6366f1;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.25);
+}
+
+.scroll-bar .scroll-bar-step.is-active .scroll-bar-step-icon img {
+  filter: invert(1) brightness(1);
+}
+
+/* Step info */
+.scroll-bar .scroll-bar-step-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 6px;
+}
+
+/* Step heading – small and dim by default */
+.scroll-bar .scroll-bar-step-heading {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.4;
+  transition:
+    color 0.3s ease,
+    font-size 0.3s ease,
+    font-weight 0.3s ease;
+}
+
+/* Active heading – large and bright */
+.scroll-bar .scroll-bar-step.is-active .scroll-bar-step-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Sub-heading – hidden by default, fades in when active */
+.scroll-bar .scroll-bar-step-subheading {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin-top: 6px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    opacity 0.35s ease,
+    max-height 0.35s ease;
+}
+
+.scroll-bar .scroll-bar-step.is-active .scroll-bar-step-subheading {
+  opacity: 1;
+  max-height: 120px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (min-width: 600px) {
+  .scroll-bar .scroll-bar-header h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 599px) {
+  .scroll-bar {
+    padding: 32px 16px 40px;
+  }
+
+  .scroll-bar .scroll-bar-step-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .scroll-bar .scroll-bar-track {
+    top: 17px; /* half of 36 px */
+  }
+
+  .scroll-bar .scroll-bar-step-icon img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .scroll-bar .scroll-bar-step-heading {
+    font-size: 0.7rem;
+  }
+
+  .scroll-bar .scroll-bar-step.is-active .scroll-bar-step-heading {
+    font-size: 0.85rem;
+  }
+}
