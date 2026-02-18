@@ -1,9 +1,10 @@
 # Your Project's Title...
 Your project's description...
 
-## Environments
-- Preview: https://main--{repo}--{owner}.aem.page/
-- Live: https://main--{repo}--{owner}.aem.live/
+#Check your site:
+Preview: https://main--scroll-bar--shajeeth-02.aem.page/
+
+Live: https://main--scroll-bar--shajeeth-02.aem.live/
 
 ## Documentation
 
