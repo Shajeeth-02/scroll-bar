@@ -10,15 +10,19 @@ export default function decorate(block) {
   });
 
  
-  const stepKeys = ['car', 'user', 'explore', 'phone'];
+  const stepKeys = ['car', 'explore', 'user', 'phone'];
   const stepsData = stepKeys.map((key) => {
     const iconCell = data[`${key}-icon`];
     const img = iconCell?.querySelector('img');
     return {
       iconSrc: img?.src || '',
       iconAlt: img?.alt || '',
-      heading: data[`${key}-icon-info-heading`]?.textContent.trim() || '',
-      subHeading: data[`${key}-icon-info-sub-heading`]?.textContent.trim() || '',
+      heading: data[`${key}-icon-info-heading`]?.textContent.trim()
+        || data[`${key}-icon-heading`]?.textContent.trim()
+        || '',
+      subHeading: data[`${key}-icon-info-sub-heading`]?.textContent.trim()
+        || data[`${key}-icon-sub-heading`]?.textContent.trim()
+        || '',
     };
   });
 
@@ -89,17 +93,22 @@ export default function decorate(block) {
     fill.style.width = `${pct}%`;
   }
 
-  stepsSection.addEventListener('mousemove', (e) => {
-    const rect = stepsSection.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const stepWidth = rect.width / stepsData.length;
-    const index = Math.min(stepsData.length - 1, Math.max(0, Math.floor(x / stepWidth)));
-    setActive(index);
-  });
+  // Scroll (mouse wheel) while cursor is over the block advances/retreats steps.
+  // A cooldown locks the step for 700 ms after each change so it feels deliberate.
+  let scrollLocked = false;
 
-  stepsSection.addEventListener('mouseleave', () => {
-    setActive(0);
-  });
+  block.addEventListener('wheel', (e) => {
+    const direction = e.deltaY > 0 ? 1 : -1;
+    const next = Math.min(stepsData.length - 1, Math.max(0, activeIndex + direction));
+    if (next !== activeIndex) {
+      e.preventDefault();
+      if (!scrollLocked) {
+        scrollLocked = true;
+        setActive(next);
+        setTimeout(() => { scrollLocked = false; }, 100);
+      }
+    }
+  }, { passive: false });
 
   fill.style.width = '0%';
 

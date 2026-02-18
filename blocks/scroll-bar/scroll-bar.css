@@ -48,6 +48,7 @@
 }
 
 
+
 .scroll-bar .scroll-bar-step {
   flex: 1;
   display: flex;
@@ -55,7 +56,6 @@
   align-items: center;
   position: relative;
   z-index: 1;
-  cursor: pointer;
 }
 
 
