@@ -1,10 +1,6 @@
-/**
- * Scroll Bar block – interactive step progress indicator.
- * Hover over the steps to move the progress fill and highlight the active step.
- * @param {Element} block The block element
- */
+
 export default function decorate(block) {
-  // Parse every row into a label → cell map
+ 
   const data = {};
   [...block.children].forEach((row) => {
     const cells = [...row.querySelectorAll(':scope > div')];
@@ -13,11 +9,10 @@ export default function decorate(block) {
     data[key] = cells[1];
   });
 
-  // Step definitions in order
+ 
   const stepKeys = ['car', 'user', 'explore', 'phone'];
   const stepsData = stepKeys.map((key) => {
     const iconCell = data[`${key}-icon`];
-    // Support both plain <img> and <picture><img>
     const img = iconCell?.querySelector('img');
     return {
       iconSrc: img?.src || '',
@@ -27,7 +22,6 @@ export default function decorate(block) {
     };
   });
 
-  // ── Header ───────────────────────────────────────────────────────────────
   const header = document.createElement('div');
   header.className = 'scroll-bar-header';
 
@@ -39,11 +33,9 @@ export default function decorate(block) {
 
   header.append(h2, subP);
 
-  // ── Steps section ─────────────────────────────────────────────────────────
   const stepsSection = document.createElement('div');
   stepsSection.className = 'scroll-bar-steps';
 
-  // Connecting track line (sits behind the icons)
   const track = document.createElement('div');
   track.className = 'scroll-bar-track';
 
@@ -52,13 +44,12 @@ export default function decorate(block) {
   track.append(fill);
   stepsSection.append(track);
 
-  // Build each step element
   const stepEls = stepsData.map((step, i) => {
     const stepEl = document.createElement('div');
     stepEl.className = 'scroll-bar-step';
     if (i === 0) stepEl.classList.add('is-active');
 
-    // Icon circle
+   
     const iconWrap = document.createElement('div');
     iconWrap.className = 'scroll-bar-step-icon';
     if (step.iconSrc) {
@@ -70,7 +61,7 @@ export default function decorate(block) {
       iconWrap.append(img);
     }
 
-    // Text info
+   
     const info = document.createElement('div');
     info.className = 'scroll-bar-step-info';
 
@@ -88,14 +79,12 @@ export default function decorate(block) {
     return stepEl;
   });
 
-  // ── Interaction ───────────────────────────────────────────────────────────
   let activeIndex = 0;
 
   function setActive(index) {
     if (index === activeIndex) return;
     activeIndex = index;
     stepEls.forEach((el, i) => el.classList.toggle('is-active', i === index));
-    // Fill spans 0 % (step 0 center) → 100 % (last step center)
     const pct = stepsData.length > 1 ? (index / (stepsData.length - 1)) * 100 : 0;
     fill.style.width = `${pct}%`;
   }
@@ -112,7 +101,6 @@ export default function decorate(block) {
     setActive(0);
   });
 
-  // Initialise fill at step 0 (fill = 0 %)
   fill.style.width = '0%';
 
   block.replaceChildren(header, stepsSection);

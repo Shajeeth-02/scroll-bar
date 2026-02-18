@@ -1,12 +1,9 @@
-/* ── Scroll-bar block ─────────────────────────────────────────────────────── */
-
 .scroll-bar {
   background-color: #12122a;
   color: #fff;
   padding: 48px 32px 56px;
 }
 
-/* Header */
 .scroll-bar .scroll-bar-header {
   margin-bottom: 40px;
 }
@@ -25,19 +22,17 @@
   margin: 0;
 }
 
-/* Steps wrapper – positions the track behind the icons */
+
 .scroll-bar .scroll-bar-steps {
   position: relative;
   display: flex;
   align-items: flex-start;
 }
 
-/* Connecting track line
-   Spans between the centre of the first icon (12.5 % with 4 equal steps)
-   and the centre of the last icon (87.5 % → right: 12.5 %) */
+
 .scroll-bar .scroll-bar-track {
   position: absolute;
-  top: 23px; /* half of the 46 px icon circle */
+  top: 23px; 
   left: 12.5%;
   right: 12.5%;
   height: 2px;
@@ -52,7 +47,7 @@
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Individual step */
+
 .scroll-bar .scroll-bar-step {
   flex: 1;
   display: flex;
@@ -63,7 +58,7 @@
   cursor: pointer;
 }
 
-/* Icon circle */
+
 .scroll-bar .scroll-bar-step-icon {
   width: 46px;
   height: 46px;
@@ -88,7 +83,7 @@
   transition: filter 0.3s ease;
 }
 
-/* Active icon */
+
 .scroll-bar .scroll-bar-step.is-active .scroll-bar-step-icon {
   background: #6366f1;
   border-color: #6366f1;
@@ -99,7 +94,7 @@
   filter: invert(1) brightness(1);
 }
 
-/* Step info */
+
 .scroll-bar .scroll-bar-step-info {
   display: flex;
   flex-direction: column;
@@ -108,7 +103,7 @@
   padding: 0 6px;
 }
 
-/* Step heading – small and dim by default */
+
 .scroll-bar .scroll-bar-step-heading {
   display: block;
   font-size: 0.8rem;
@@ -121,14 +116,14 @@
     font-weight 0.3s ease;
 }
 
-/* Active heading – large and bright */
+
 .scroll-bar .scroll-bar-step.is-active .scroll-bar-step-heading {
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
 }
 
-/* Sub-heading – hidden by default, fades in when active */
+
 .scroll-bar .scroll-bar-step-subheading {
   display: block;
   font-size: 0.8rem;
@@ -148,7 +143,7 @@
   max-height: 120px;
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
+
 
 @media (min-width: 600px) {
   .scroll-bar .scroll-bar-header h2 {
